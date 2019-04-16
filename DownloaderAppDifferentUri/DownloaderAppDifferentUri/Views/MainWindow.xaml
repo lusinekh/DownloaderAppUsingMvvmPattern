@@ -1,0 +1,74 @@
+﻿<Window x:Class="DownloaderAppDifferentUri.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DownloaderAppDifferentUri.ViewModels"       
+    
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+
+
+    <Window.DataContext>
+        <local:MainWindowViewModel/>
+    </Window.DataContext>
+
+    <Border Background="Lavender" BorderBrush="LavenderBlush" BorderThickness="2" CornerRadius="15">
+        <Grid Margin="20">
+
+
+            <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="508"/>
+            
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="110"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="140"/>
+        </Grid.ColumnDefinitions>
+
+        <!--<Label Grid.Row="0" Grid.Column="1" Name="ShowEp" Content="you can choose new itm "/>-->
+
+            <ListView Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Models}"  Name="listViewDownload"
+               Height="959"  Width="762"   SelectionMode="Extended"                       
+                       SelectedItem="{Binding SelectedUser}" IsSynchronizedWithCurrentItem="True"                        
+                      
+                      
+                      >  
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel >
+                        <WrapPanel>
+                            <TextBox Width="100" Height="80"
+                                Text ="{Binding FileName,Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}"                      
+                  AcceptsReturn="True" TextWrapping="WrapWithOverflow" SpellCheck.IsEnabled="True"/>                              
+                                
+                               
+                          </WrapPanel>
+                        <ProgressBar Maximum="100" Name ="DownloadProgressBar" Value="{Binding  Progress,Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}"
+                                      
+                                  Width="100" Height="80"    
+                                      />
+                    </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
+
+            <Button Grid.Row="0" Grid.Column="1" Name="DownloadItm" Content="StartDownload"   Height="50" Width="200"  HorizontalAlignment="Left" VerticalAlignment="Top"
+                 Command="{Binding EddNewDownloadItem}"                     
+                    
+                    />
+
+            <Button Grid.Row="1" Grid.Column="2" Name="Download" Content="AddDownloadItm"   Height="50" Width="200"  HorizontalAlignment="Left" VerticalAlignment="Top"
+                 Command="{Binding   EddDownload}"                     
+                    
+                    />
+
+
+        </Grid>
+    </Border>
+</Window>
