@@ -27,29 +27,21 @@ namespace DownloaderAppDifferentUri.ViewModels
         public System.Windows.Visibility _visibility;
 
         public event PropertyChangedEventHandler PropertyChanged;
-        #endregion
-
-      
+        #endregion     
 
 
         #region Constructrs
         public MainWindowViewModel()
         {
-            _model =new DownloadItm();
-           
+            _model =new DownloadItm();           
             _models = new ObservableCollection<DownloadItm>();
             Visibility1 = Visibility.Hidden;
             EddNewDownloadItem = new Relaycommand(DownloadItemEcecute);
             EddDownload = new Relaycommand( AddDownloadItem);
-
         }
         #endregion
 
-
-
-
         #region  Propertys
-
         public ICommand EddNewDownloadItem { get; }
         public ICommand EddDownload { get; }
         public ObservableCollection<DownloadItm> Models
@@ -61,7 +53,6 @@ namespace DownloaderAppDifferentUri.ViewModels
                 RaisePropertyChanged("Models");
             }
         }  
-
         public DownloadItm SelectedDownloadItm
         {
             get { return _selectedDownloadItm; }
@@ -71,8 +62,6 @@ namespace DownloaderAppDifferentUri.ViewModels
                 RaisePropertyChanged("SelectedDownloadItm");
             }
         }
-
-
         public Visibility Visibility1
         {
             get { return _visibility; }
@@ -81,8 +70,7 @@ namespace DownloaderAppDifferentUri.ViewModels
                 _visibility = value;
                 RaisePropertyChanged("Visibility1");
             }
-        }      
-
+        } 
         public string FileName
         {
             get { return Model.FileName; }
@@ -93,7 +81,6 @@ namespace DownloaderAppDifferentUri.ViewModels
             }
 
         }
-
         public WebClient Client
         {
             get { return Model.Client; }
@@ -102,7 +89,6 @@ namespace DownloaderAppDifferentUri.ViewModels
                 Model.Client = value;
                 RaisePropertyChanged("Client");
             }
-
         }
 
         public static int e=0;
@@ -114,7 +100,6 @@ namespace DownloaderAppDifferentUri.ViewModels
                 RaisePropertyChanged("Progress");
                 Model.Progress = value;
             }
-
         }
         public DownloadItm Model
         {
@@ -125,9 +110,7 @@ namespace DownloaderAppDifferentUri.ViewModels
                 RaisePropertyChanged("Model");
             }
         }
-
         #endregion
-
 
         #region Functions
         public  async void AddDownloadItem()
@@ -136,15 +119,11 @@ namespace DownloaderAppDifferentUri.ViewModels
             {
                 if (SelectedDownloadItm != null)
                 {
-
-
                     for (int i = 0; i < Models.Count; i++)
                     {
                         if (Models[i] == SelectedDownloadItm)
                         {
-                            //Progress=8976;
                             Uri address = new Uri(Models[i].FileName);
-
                             string[] ar = address.Segments;
 
                             string EnterFolderName = $"Folder{i}";
@@ -167,8 +146,7 @@ namespace DownloaderAppDifferentUri.ViewModels
 
                         }
 
-                    }
-                    
+                    }                   
 
                 }
 
@@ -183,11 +161,8 @@ namespace DownloaderAppDifferentUri.ViewModels
 
                 MessageBox.Show(e.ToString());
             }
-            i++;
-            //MessageBox.Show($"{ConnectionString},{DataToSend},{ResivedData}");
+            i++;            
         }
-
-
         private void ProgresBarr_ValueChanged(object sender, DownloadProgressChangedEventArgs e)
         {
             double bytesIn = double.Parse(e.BytesReceived.ToString());
@@ -208,7 +183,6 @@ namespace DownloaderAppDifferentUri.ViewModels
         {
             MessageBox.Show("Download Completed");
         }
-
         public void DownloadItemEcecute()
         {
             try
@@ -225,7 +199,6 @@ namespace DownloaderAppDifferentUri.ViewModels
                 MessageBox.Show(e.ToString());
             }
         }
-
         public bool CanDownloadItem()
         {
             return true;
